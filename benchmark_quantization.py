@@ -210,6 +210,8 @@ def run_quantization_benchmark(
         
         except Exception as e:
             print(f"Error benchmarking {quant}: {e}")
+            import traceback
+            traceback.print_exc()
             continue
     
     # Save results

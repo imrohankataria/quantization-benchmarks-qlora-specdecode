@@ -58,7 +58,7 @@ class GPUMonitor:
             try:
                 pynvml.nvmlInit()
                 self.handle = pynvml.nvmlDeviceGetHandleByIndex(0)
-            except:
+            except Exception:
                 self.available = False
     
     def get_gpu_memory_usage(self) -> Dict[str, float]:
@@ -73,7 +73,7 @@ class GPUMonitor:
                 "total": info.total / 1024**2,
                 "free": info.free / 1024**2,
             }
-        except:
+        except Exception:
             return {"used": 0.0, "total": 0.0, "free": 0.0}
     
     def get_gpu_utilization(self) -> float:
@@ -84,14 +84,14 @@ class GPUMonitor:
         try:
             util = pynvml.nvmlDeviceGetUtilizationRates(self.handle)
             return util.gpu
-        except:
+        except Exception:
             return 0.0
     
     def __del__(self):
         if self.available:
             try:
                 pynvml.nvmlShutdown()
-            except:
+            except Exception:
                 pass
 
 
