@@ -1,0 +1,161 @@
+# Quantization Benchmarks Configuration
+# Edit this file to customize benchmark settings
+
+# ======================================
+# Model Settings
+# ======================================
+
+# Models to benchmark (HuggingFace model IDs)
+models:
+  small:
+    - facebook/opt-125m
+    - facebook/opt-350m
+  medium:
+    - facebook/opt-1.3b
+    - facebook/opt-2.7b
+  large:
+    - facebook/opt-6.7b
+    - meta-llama/Llama-2-7b-hf  # Requires access token
+
+# Default model for quick tests
+default_model: facebook/opt-350m
+
+# ======================================
+# Quantization Settings
+# ======================================
+
+quantization:
+  methods:
+    - fp16
+    - 8bit
+    - 4bit
+  
+  # 8-bit specific settings
+  int8:
+    threshold: 6.0
+  
+  # 4-bit specific settings
+  int4:
+    compute_dtype: float16
+    use_double_quant: true
+    quant_type: nf4
+
+# ======================================
+# Speculative Decoding Settings
+# ======================================
+
+speculative_decoding:
+  # Model pairs (target, draft)
+  model_pairs:
+    - target: facebook/opt-1.3b
+      draft: facebook/opt-350m
+    - target: facebook/opt-2.7b
+      draft: facebook/opt-350m
+  
+  # Lookahead settings
+  lookahead:
+    default: 4
+    min: 2
+    max: 8
+
+# ======================================
+# Benchmark Settings
+# ======================================
+
+benchmark:
+  # Number of warmup runs (not counted in results)
+  warmup_runs: 1
+  
+  # Number of benchmark runs (averaged for results)
+  num_runs: 5
+  
+  # Generation settings
+  max_new_tokens: 100
+  do_sample: false
+  temperature: 1.0
+  
+  # Test prompts
+  prompts:
+    - "The future of artificial intelligence is"
+    - "In recent years, machine learning has"
+    - "Large language models are capable of"
+    - "The main advantage of quantization is"
+
+# ======================================
+# Cost Analysis Settings
+# ======================================
+
+cost_analysis:
+  # GPU pricing (USD per hour)
+  gpu_costs:
+    A100-80GB: 1.40
+    A100-40GB: 1.10
+    A10G: 0.70
+    V100: 0.80
+    T4: 0.35
+    L4: 0.60
+  
+  # Default GPU for calculations
+  default_gpu: A100-40GB
+  
+  # Deployment scenarios
+  scenarios:
+    small_scale: 1_000_000      # 1M requests/month
+    medium_scale: 10_000_000    # 10M requests/month
+    large_scale: 100_000_000    # 100M requests/month
+
+# ======================================
+# Visualization Settings
+# ======================================
+
+visualization:
+  # Chart style
+  style: whitegrid
+  
+  # Figure DPI
+  dpi: 300
+  
+  # Color schemes
+  colors:
+    quantization:
+      - "#3498db"  # FP16 - Blue
+      - "#e74c3c"  # 8-bit - Red
+      - "#2ecc71"  # 4-bit - Green
+    speculative:
+      - "#3498db"  # Standard - Blue
+      - "#2ecc71"  # Speculative - Green
+  
+  # Output format
+  format: png
+
+# ======================================
+# Output Settings
+# ======================================
+
+output:
+  # Default directories
+  results_dir: results
+  visualizations_dir: visualizations
+  logs_dir: logs
+  
+  # File naming
+  timestamp_format: "%Y%m%d_%H%M%S"
+  
+  # Save settings
+  save_json: true
+  save_csv: true
+
+# ======================================
+# System Settings
+# ======================================
+
+system:
+  # CUDA settings
+  cuda_visible_devices: "0"
+  
+  # Memory management
+  clear_cache_between_runs: true
+  
+  # Logging
+  log_level: INFO
+  verbose: true
