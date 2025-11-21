@@ -1,0 +1,30 @@
+[
+  {
+    "model_name": "facebook/opt-1.3b",
+    "quantization": "fp16",
+    "speculative_decoding": false,
+    "inference_time": 5.2,
+    "tokens_per_second": 19.2,
+    "speedup": 1.0,
+    "vram_used_mb": 2800.0,
+    "vram_savings_percent": 0.0,
+    "perplexity": null,
+    "accuracy": null,
+    "training_time_per_epoch": null,
+    "estimated_cost_per_epoch": null
+  },
+  {
+    "model_name": "facebook/opt-1.3b + facebook/opt-350m",
+    "quantization": "fp16",
+    "speculative_decoding": true,
+    "inference_time": 2.8,
+    "tokens_per_second": 35.7,
+    "speedup": 1.86,
+    "vram_used_mb": 3150.0,
+    "vram_savings_percent": -12.5,
+    "perplexity": null,
+    "accuracy": null,
+    "training_time_per_epoch": null,
+    "estimated_cost_per_epoch": null
+  }
+]

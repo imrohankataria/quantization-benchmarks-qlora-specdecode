@@ -1,0 +1,44 @@
+[
+  {
+    "model_name": "facebook/opt-350m",
+    "quantization": "fp16",
+    "speculative_decoding": false,
+    "inference_time": 2.45,
+    "tokens_per_second": 40.8,
+    "speedup": 1.0,
+    "vram_used_mb": 1350.0,
+    "vram_savings_percent": 0.0,
+    "perplexity": 15.2,
+    "accuracy": null,
+    "training_time_per_epoch": 3600.0,
+    "estimated_cost_per_epoch": 1.1
+  },
+  {
+    "model_name": "facebook/opt-350m",
+    "quantization": "8bit",
+    "speculative_decoding": false,
+    "inference_time": 2.52,
+    "tokens_per_second": 39.7,
+    "speedup": 0.97,
+    "vram_used_mb": 810.0,
+    "vram_savings_percent": 40.0,
+    "perplexity": 15.3,
+    "accuracy": null,
+    "training_time_per_epoch": 3720.0,
+    "estimated_cost_per_epoch": 1.14
+  },
+  {
+    "model_name": "facebook/opt-350m",
+    "quantization": "4bit",
+    "speculative_decoding": false,
+    "inference_time": 2.68,
+    "tokens_per_second": 37.3,
+    "speedup": 0.91,
+    "vram_used_mb": 450.0,
+    "vram_savings_percent": 66.7,
+    "perplexity": 15.8,
+    "accuracy": null,
+    "training_time_per_epoch": 3900.0,
+    "estimated_cost_per_epoch": 1.19
+  }
+]
